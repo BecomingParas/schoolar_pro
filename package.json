@@ -5,6 +5,8 @@
   "scripts": {
     "dev:frontend": "nx dev frontend",
     "dev:backend": "nx dev backend",
+    "dev:mobile": "nx start mobile",
+    "dev:mobile:android": "nx start mobile --android",
     "dev": "nx run-many --target=dev --projects=frontend,backend --parallel",
     "build:frontend": "nx build frontend",
     "build:backend": "nx build backend",
