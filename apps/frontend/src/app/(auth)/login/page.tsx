@@ -44,33 +44,33 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col justify-between">
-      {/* Top minimal header */}
-      <header className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex items-center justify-between">
-        <Link href="/" className="inline-block group focus:outline-hidden" aria-label="BidyaGo Home">
-          <Image
-            src="/bidyago_logo.png"
-            alt="BidyaGo"
-            width={150}
-            height={38}
-            className="h-8 sm:h-9 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
-            priority
-          />
-        </Link>
+    <div className="min-h-screen bg-white flex flex-col lg:flex-row">
+      {/* Left Column: Form Section */}
+      <div className="w-full lg:w-1/2 min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-14 bg-white">
+        {/* Top Header */}
+        <div className="w-full flex items-center justify-between">
+          <Link href="/" className="inline-block group focus:outline-hidden" aria-label="BidyaGo Home">
+            <Image
+              src="/bidyago_logo.png"
+              alt="BidyaGo"
+              width={140}
+              height={36}
+              className="h-8 w-auto object-contain transition-transform duration-200 group-hover:scale-105"
+              priority
+            />
+          </Link>
 
-        <Link
-          href="/"
-          className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-normal text-slate-500 hover:text-slate-900 transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Back to Home</span>
-        </Link>
-      </header>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-1.5 text-xs font-normal text-slate-500 hover:text-slate-900 transition-colors"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            <span>Back to Home</span>
+          </Link>
+        </div>
 
-      {/* Main split content */}
-      <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        {/* Left Column: Student Login Form */}
-        <div className="lg:col-span-6 max-w-md w-full mx-auto lg:mx-0 space-y-7">
+        {/* Center: Student Login Form */}
+        <div className="w-full max-w-md mx-auto my-auto py-8 space-y-7">
           <div className="space-y-2">
             <span className="text-xs font-normal text-slate-400 uppercase tracking-widest block">
               Student Sign In
@@ -113,26 +113,25 @@ export default function LoginPage() {
             </button>
           </div>
 
-          {/* Divider */}
           <div className="relative flex items-center justify-center">
-            <div className="border-t border-slate-200 w-full" />
-            <span className="bg-white px-3 text-xs text-slate-400 font-normal uppercase tracking-wider relative">
+            <div className="border-t border-slate-200/80 w-full" />
+            <span className="bg-white px-3 text-[11px] font-normal uppercase tracking-wider text-slate-400 absolute">
               or continue with email
             </span>
           </div>
 
-          {/* Feedback Banner */}
-          {successMessage && (
-            <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-normal flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>{successMessage}</span>
-            </div>
-          )}
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {successMessage && (
+              <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-2xl flex items-center gap-2 text-xs text-emerald-800">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>{successMessage}</span>
+              </div>
+            )}
 
-          {/* Email / Password Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+            {/* Email field */}
             <div className="space-y-1.5">
-              <label className="text-xs font-normal text-slate-600 block">
+              <label className="block text-xs font-medium text-slate-700">
                 Email Address
               </label>
               <div className="relative">
@@ -142,27 +141,24 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="your.email@example.com"
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-normal text-slate-900 focus:bg-white focus:outline-hidden focus:border-slate-400 transition-colors"
+                  placeholder="name@example.com"
+                  className="w-full pl-10 pr-4 py-2.5 rounded-full border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-[#4b37df] focus:ring-1 focus:ring-[#4b37df] transition-colors"
                 />
               </div>
             </div>
 
+            {/* Password field */}
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-normal text-slate-600">
+                <label className="block text-xs font-medium text-slate-700">
                   Password
                 </label>
-                <a
-                  href="#forgot"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    alert('Password reset instructions will be sent to your verified email.');
-                  }}
-                  className="text-xs font-normal text-slate-500 hover:text-slate-900 transition-colors"
+                <Link
+                  href="/#faqs"
+                  className="text-xs font-normal text-[#4b37df] hover:underline"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
               <div className="relative">
                 <Lock className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -172,12 +168,12 @@ export default function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm font-normal text-slate-900 focus:bg-white focus:outline-hidden focus:border-slate-400 transition-colors"
+                  className="w-full pl-10 pr-10 py-2.5 rounded-full border border-slate-200 bg-white text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-hidden focus:border-[#4b37df] focus:ring-1 focus:ring-[#4b37df] transition-colors"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-hidden cursor-pointer"
+                  className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-hidden"
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
                   {showPassword ? (
@@ -190,15 +186,17 @@ export default function LoginPage() {
             </div>
 
             {/* Remember Me */}
-            <div className="flex items-center pt-1">
-              <label className="flex items-center gap-2 cursor-pointer text-xs font-normal text-slate-600">
+            <div className="flex items-center">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="checkbox"
                   checked={rememberMe}
                   onChange={(e) => setRememberMe(e.target.checked)}
-                  className="w-4 h-4 rounded-sm border-slate-300 text-slate-900 focus:ring-0 cursor-pointer"
+                  className="w-3.5 h-3.5 rounded-sm border-slate-300 text-[#4b37df] focus:ring-[#4b37df]"
                 />
-                <span>Keep me signed in on this device</span>
+                <span className="text-xs text-slate-600 font-normal">
+                  Remember this device for 30 days
+                </span>
               </label>
             </div>
 
@@ -206,17 +204,23 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full mt-2 py-3 px-6 rounded-full bg-slate-900 hover:bg-[#4b37df] text-white text-xs sm:text-sm font-normal transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 py-3 px-6 rounded-full bg-[#4b37df] hover:bg-[#3d2ac9] text-white text-xs sm:text-sm font-normal transition-all shadow-xs cursor-pointer disabled:opacity-50"
             >
-              <span>{isLoading ? 'Signing In...' : 'Sign In as Student'}</span>
-              <ArrowRight className="w-4 h-4" />
+              {isLoading ? (
+                <span>Authenticating...</span>
+              ) : (
+                <>
+                  <span>Sign In to Dashboard</span>
+                  <ArrowRight className="w-4 h-4" />
+                </>
+              )}
             </button>
           </form>
 
-          {/* Switch to Signup */}
-          <div className="text-center space-y-1.5 pt-2">
-            <p className="text-xs font-normal text-slate-500">
-              Don't have a BidyaGo student account yet?{' '}
+          {/* Bottom Switcher */}
+          <div className="text-center space-y-2 pt-2">
+            <p className="text-xs text-slate-500 font-normal">
+              New to BidyaGo?{' '}
               <Link
                 href="/signup"
                 className="text-slate-900 font-medium hover:underline hover:text-[#4b37df] transition-colors"
@@ -233,77 +237,88 @@ export default function LoginPage() {
           </div>
         </div>
 
-        {/* Right Column: Visual Platform Trust Showcase */}
-        <div className="hidden lg:block lg:col-span-6 pl-8">
-          <div className="rounded-3xl bg-slate-50 border border-slate-200/80 p-8 sm:p-10 space-y-8">
-            <div className="space-y-3">
-              <span className="text-[11px] font-normal uppercase tracking-wider text-slate-400 block">
-                BidyaGo Student Gateway
-              </span>
-              <h2 className="text-2xl font-light text-slate-900 leading-snug">
-                One verified gateway for scholarships, universities, and consultancies.
-              </h2>
-              <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                Empowering students from Nepal and across South Asia with authentic, direct access to global academic funding opportunities.
-              </p>
-            </div>
-
-            {/* Platform Highlights */}
-            <div className="space-y-4">
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-100 shadow-2xs">
-                <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-xs font-medium text-slate-900">
-                    100% Free Core Scholarship Discovery
-                  </h4>
-                  <p className="text-[11px] text-slate-500 font-normal mt-0.5">
-                    We never charge students to search, compare, or discover verified grants.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-100 shadow-2xs">
-                <Globe2 className="w-5 h-5 text-[#4b37df] shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-xs font-medium text-slate-900">
-                    Official Embassy & Ministry Portals
-                  </h4>
-                  <p className="text-[11px] text-slate-500 font-normal mt-0.5">
-                    Every scholarship routes directly to official application sources without middlemen.
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-100 shadow-2xs">
-                <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="text-xs font-medium text-slate-900">
-                    Verified Nepal Education Consultancies
-                  </h4>
-                  <p className="text-[11px] text-slate-500 font-normal mt-0.5">
-                    Directory entries verified through Ministry of Education (MoEST) criteria.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Transparent Note */}
-            <p className="text-[11px] text-slate-400 font-normal border-t border-slate-200/60 pt-4">
-              * Note: BidyaGo is an educational intelligence and application guidance platform. We do not award scholarships directly or guarantee university admission.
-            </p>
+        {/* Bottom Minimal Footer */}
+        <div className="w-full pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 font-normal">
+          <p>© {new Date().getFullYear()} BidyaGo, Inc. All rights reserved.</p>
+          <div className="flex items-center gap-4">
+            <Link href="/#faqs" className="hover:text-slate-600 transition-colors">Privacy Policy</Link>
+            <Link href="/#faqs" className="hover:text-slate-600 transition-colors">Terms of Service</Link>
+            <Link href="/#faqs" className="hover:text-slate-600 transition-colors">Help Center</Link>
           </div>
         </div>
-      </main>
+      </div>
 
-      {/* Minimal Footer */}
-      <footer className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 font-normal">
-        <p>© {new Date().getFullYear()} BidyaGo, Inc. All rights reserved.</p>
-        <div className="flex items-center gap-5">
-          <Link href="/#faqs" className="hover:text-slate-600 transition-colors">Privacy Policy</Link>
-          <Link href="/#faqs" className="hover:text-slate-600 transition-colors">Terms of Service</Link>
-          <Link href="/#faqs" className="hover:text-slate-600 transition-colors">Help Center</Link>
+      {/* Right Column: Split Screen Showcase with Defined Brand Blue (#4b37df) Background */}
+      <div className="hidden lg:flex lg:w-1/2 min-h-screen bg-[#4b37df] bg-gradient-to-br from-[#4b37df] via-[#3f2cd6] to-[#251590] text-white p-12 lg:p-16 flex-col justify-between relative overflow-hidden">
+        {/* Ambient background glows */}
+        <div className="absolute -top-32 -right-32 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-[#251590]/60 rounded-full blur-3xl pointer-events-none" />
+
+        {/* Top badge */}
+        <div className="relative z-10 flex items-center justify-between">
+          <span className="text-xs font-normal text-white/90 uppercase tracking-widest bg-white/15 px-3.5 py-1 rounded-full border border-white/20 backdrop-blur-md">
+            BidyaGo Student Gateway
+          </span>
+          <span className="text-xs font-light text-white/70">100% Free for Students</span>
         </div>
-      </footer>
+
+        {/* Middle Content */}
+        <div className="relative z-10 my-auto py-10 space-y-8 max-w-lg">
+          <div className="space-y-3">
+            <h2 className="text-3xl sm:text-4xl font-light text-white tracking-tight leading-snug">
+              One verified gateway for scholarships, universities, and consultancies.
+            </h2>
+            <p className="text-sm text-white/80 font-normal leading-relaxed">
+              Empowering students from Nepal and across South Asia with authentic, direct access to global academic funding opportunities.
+            </p>
+          </div>
+
+          {/* Platform Highlights in translucent glass cards */}
+          <div className="space-y-3.5">
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md shadow-xs">
+              <ShieldCheck className="w-5 h-5 text-emerald-300 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-medium text-white">
+                  100% Free Core Scholarship Discovery
+                </h4>
+                <p className="text-[11px] text-white/75 font-normal mt-0.5 leading-relaxed">
+                  We never charge students to search, compare, or discover verified grants.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md shadow-xs">
+              <Globe2 className="w-5 h-5 text-purple-200 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-medium text-white">
+                  Official Embassy & Ministry Portals
+                </h4>
+                <p className="text-[11px] text-white/75 font-normal mt-0.5 leading-relaxed">
+                  Every scholarship routes directly to official application sources without middlemen.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3.5 p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-md shadow-xs">
+              <CheckCircle2 className="w-5 h-5 text-emerald-300 shrink-0 mt-0.5" />
+              <div>
+                <h4 className="text-xs font-medium text-white">
+                  Verified Nepal Education Consultancies
+                </h4>
+                <p className="text-[11px] text-white/75 font-normal mt-0.5 leading-relaxed">
+                  Directory entries verified through Ministry of Education (MoEST) criteria.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Transparent Note */}
+        <div className="relative z-10 pt-6 border-t border-white/15 flex items-center justify-between text-[11px] text-white/70 font-normal">
+          <span>* Transparent, non-grantor platform</span>
+          <span>Zero Middlemen Fees</span>
+        </div>
+      </div>
     </div>
   );
 }
